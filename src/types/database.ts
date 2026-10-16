@@ -784,6 +784,10 @@ export type Database = {
         Args: { p_invoice: string; p_jumlah: number; p_metode: string }
         Returns: undefined
       }
+      catat_stok_masuk: {
+        Args: { p_item: string; p_jumlah: number; p_keterangan?: string }
+        Returns: undefined
+      }
       hapus_item_tagihan: {
         Args: { p_billing_item: string }
         Returns: undefined
@@ -791,6 +795,10 @@ export type Database = {
       sesuaikan_harga_item: {
         Args: { p_alasan: string; p_billing_item: string; p_harga: number }
         Returns: boolean
+      }
+      sesuaikan_stok: {
+        Args: { p_alasan: string; p_item: string; p_stok_fisik: number }
+        Returns: undefined
       }
       tambah_item_tagihan: {
         Args: { p_item: string; p_jumlah: number; p_wo: string }

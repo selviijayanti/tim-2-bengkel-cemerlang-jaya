@@ -5,10 +5,8 @@ import {
   CheckCircle,
   Clock,
   DollarSign,
-  Package,
   Plus,
   TrendingUp,
-  Users,
   Wallet,
   Wrench,
 } from "lucide-react";
@@ -16,12 +14,12 @@ import { Button } from "@/components/ui/button";
 import { rupiah } from "@/lib/format";
 import { ambilProfilSaya } from "@/lib/profil";
 import { createClient } from "@/lib/supabase/server";
+import { KartuKPI } from "./KartuKPI";
 import {
   GrafikBebanMekanik,
   GrafikDonutStatus,
   GrafikTopItem,
   GrafikTrenHarian,
-  KartuKPI,
   PenyaringPeriode,
   type Periode,
 } from "./KomponenDashboard";

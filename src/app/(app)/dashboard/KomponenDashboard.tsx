@@ -1,15 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import {
-  ArrowDownRight,
-  ArrowUpRight,
-  Calendar,
-  ExternalLink,
-  Inbox,
-  type LucideIcon,
-} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Calendar, ExternalLink, Inbox } from "lucide-react";
 import {
   Area,
   AreaChart,
@@ -25,15 +18,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-  type ChartConfig,
-} from "@/components/ui/chart";
+import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { rupiah, rupiahRingkas, tanggal } from "@/lib/format";
 
 export type Periode = "hari_ini" | "7_hari" | "30_hari" | "bulan_ini";
@@ -79,76 +66,6 @@ export function PenyaringPeriode({ aktif }: { aktif: Periode }) {
   );
 }
 
-/**
- * Kartu KPI dengan angka besar, perbandingan periode sebelumnya, dan klik data sumber
- */
-export function KartuKPI({
-  judul,
-  nilai,
-  ikon: Ikon,
-  perubahanPersen,
-  keteranganPerubahan,
-  keteranganTambahan,
-  href,
-  varianWarnaIkon = "text-primary",
-}: {
-  judul: string;
-  nilai: string | number;
-  ikon: LucideIcon;
-  perubahanPersen?: number | null;
-  keteranganPerubahan?: string;
-  keteranganTambahan?: string;
-  href?: string;
-  varianWarnaIkon?: string;
-}) {
-  const adaPerubahan = typeof perubahanPersen === "number" && !isNaN(perubahanPersen);
-  const naik = adaPerubahan && perubahanPersen >= 0;
-
-  const content = (
-    <Card className="group relative transition-all hover:border-primary/50 hover:shadow-md">
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-xs font-medium text-text-muted">{judul}</CardTitle>
-        <div className="flex items-center gap-1">
-          <Ikon className={`h-4 w-4 ${varianWarnaIkon}`} />
-          {href && (
-            <ExternalLink className="h-3 w-3 text-muted-foreground/40 opacity-0 transition-opacity group-hover:opacity-100" />
-          )}
-        </div>
-      </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold tabular-nums text-text">{nilai}</div>
-        <div className="mt-1 flex flex-wrap items-center gap-1.5 text-xs text-text-muted">
-          {adaPerubahan ? (
-            <span
-              className={`inline-flex items-center font-medium ${
-                naik ? "text-success" : "text-danger"
-              }`}
-            >
-              {naik ? (
-                <ArrowUpRight className="mr-0.5 h-3.5 w-3.5" />
-              ) : (
-                <ArrowDownRight className="mr-0.5 h-3.5 w-3.5" />
-              )}
-              {Math.abs(Math.round(perubahanPersen))}%
-            </span>
-          ) : null}
-          {keteranganPerubahan && <span>{keteranganPerubahan}</span>}
-          {keteranganTambahan && <span>{keteranganTambahan}</span>}
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  if (href) {
-    return (
-      <Link href={href} className="block cursor-pointer">
-        {content}
-      </Link>
-    );
-  }
-
-  return content;
-}
 
 /**
  * Tampilan kosong ketika data grafik tidak tersedia
